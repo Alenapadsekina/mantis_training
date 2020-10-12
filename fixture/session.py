@@ -6,15 +6,16 @@ class SessionHelper:
 
     def login(self, username, password):
         wd = self.app.wd
-        wd.get("http://localhost:8443/mantisbt-1.2.20/")
-        #wd.get("http://localhost/mantisbt-1.2.20/")
-        wd.find_element_by_name("username").click()
-        wd.find_element_by_name("username").clear()
-        wd.find_element_by_name("username").send_keys(username)
-        wd.find_element_by_name("password").click()
-        wd.find_element_by_name("password").clear()
-        wd.find_element_by_name("password").send_keys(password)
-        wd.find_element_by_xpath("//input[@value='Login']").click()
+        if not (wd.current_url.endswith("manage_proj_page.php")):
+            wd.get("http://localhost:8443/mantisbt-1.2.20/")
+            #wd.get("http://localhost/mantisbt-1.2.20/")
+            wd.find_element_by_name("username").click()
+            wd.find_element_by_name("username").clear()
+            wd.find_element_by_name("username").send_keys(username)
+            wd.find_element_by_name("password").click()
+            wd.find_element_by_name("password").clear()
+            wd.find_element_by_name("password").send_keys(password)
+            wd.find_element_by_xpath("//input[@value='Login']").click()
 
 
     def logout(self):
